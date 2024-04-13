@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  backend-app:
+    container_name: backend-app-container
+    build:
+      context: ./backend/app
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/app/.env
+    restart: on-failure
+    ports:
+      - "5000:5000"

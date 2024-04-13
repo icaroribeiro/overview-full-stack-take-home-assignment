@@ -1,0 +1,4 @@
+.idea/
+backend/__pycache__/
+backend/*.py[cod]
+backend/*$py.class

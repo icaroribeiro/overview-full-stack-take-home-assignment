@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "e39f186b-6ed7-401b-bb14-38ca1b5ea587",
+		"name": "overview-full-stack-take-home-assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DetectObject",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/detect",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"detect"
+					]
+				},
+				"description": "Receives an image path, confidence threshold, and IoU threshold and returns the detection results."
+			},
+			"response": []
+		},
+		{
+			"name": "HealthCheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/health_check",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"health_check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoadModel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/load_model",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"load_model"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

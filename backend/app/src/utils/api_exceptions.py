@@ -10,8 +10,8 @@ class ApiException(HTTPException):
         rv = {"message": message}
         if extra:
             rv["extra"] = extra
-        self.data = rv
-        self.code = code
+        self.__data = rv
+        self.__code = code
 
 
 class ServerErrorException(ApiException):

@@ -1,3 +1,5 @@
+from http import HTTPStatus
+
 from flask_restx import Namespace, Resource, fields
 from src.controller.dto.health_check_response import HealthCheckResponse
 from src.utils.json_response import respond_with_json
@@ -28,5 +30,5 @@ class HealthCheck(Resource):
         description="Internal Server Error",
     )
     def get(self):
-        response = HealthCheckResponse(ok=True)
-        return respond_with_json(payload=response, status_code=200)
+        payload = HealthCheckResponse(ok=True)
+        return respond_with_json(payload=payload, status_code=HTTPStatus.OK)

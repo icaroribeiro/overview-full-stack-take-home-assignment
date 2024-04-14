@@ -1,6 +1,6 @@
 import json
 
-from flask import make_response, Response
+from flask import Response, make_response
 from pydantic import BaseModel
 
 

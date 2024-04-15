@@ -1,6 +1,7 @@
 from dependency_injector import containers, providers
 from src.infrastructure.database.database_session_manager import DatabaseSessionManager
 from src.service.health_check import HealthCheckService
+from src.service.model import ModelService
 
 
 def session_factory(conn_string: str):
@@ -29,6 +30,8 @@ class ServiceContainer(containers.DeclarativeContainer):
     health_check_service = providers.Factory(
         HealthCheckService, session=infrastructure.session
     )
+
+    model_service = providers.Factory(ModelService)
 
 
 class AppContainer(containers.DeclarativeContainer):

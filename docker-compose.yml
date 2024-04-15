@@ -11,3 +11,21 @@ services:
     restart: on-failure
     ports:
       - "5000:5000"
+    depends_on:
+      - db
+
+  db:
+    container_name: db-container
+    build:
+      context: ./backend/db
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/db/.env
+    restart: on-failure
+    ports:
+      - "5434:5432"
+    volumes:
+      - db-container-data:/var/lib/postgresql/data
+
+volumes:
+  db-container-data:

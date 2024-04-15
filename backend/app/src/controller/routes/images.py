@@ -5,7 +5,8 @@ from flask import request
 from flask_restx import Namespace, Resource, fields
 from src import AppContainer
 from src.controller.dto.images import UploadImageResponse
-from src.service.image import ImageService
+from src.infrastructure import application_settings
+from src.service.file import FileService
 from src.utils.api_exceptions import NoContentException
 from src.utils.json_response import respond_with_json
 
@@ -27,14 +28,16 @@ class UploadImage(Resource):
     def __init__(
         self,
         api=None,
-        service: ImageService = Provide[AppContainer.service.image_service],
+        service: FileService = Provide[AppContainer.service.file_service],
         *args,
         **kwargs,
     ):
         super().__init__(api, *args, **kwargs)
         self.__service = service
 
-    @api.response(code=200, model=upload_image_response_fields, description="OK")
+    @api.response(
+        code=HTTPStatus.OK, model=upload_image_response_fields, description="OK"
+    )
     def post(self):
         if "file" not in request.files:
             raise NoContentException(
@@ -42,8 +45,10 @@ class UploadImage(Resource):
             )
 
         file = request.files["file"]
-
-        image_path = self.__service.save_image(file=file)
+        allowed_extensions = application_settings.allowed_image_extensions.split(";")
+        image_path = self.__service.save_file(
+            file=file, allowed_extensions=allowed_extensions
+        )
 
         payload = UploadImageResponse(path=image_path)
         return respond_with_json(payload=payload, code=HTTPStatus.OK.value)

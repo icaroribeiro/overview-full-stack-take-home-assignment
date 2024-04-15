@@ -38,8 +38,8 @@ class ApplicationSettings:
         return self.get(key="UPLOAD_FOLDER", default_value="/uploads")
 
     @property
-    def allowed_extensions(self) -> str:
-        return self.get(key="ALLOWED_EXTENSIONS", default_value="jpg")
+    def allowed_image_extensions(self) -> str:
+        return self.get(key="ALLOWED_IMAGE_EXTENSIONS", default_value="jpg")
 
     @staticmethod
     def get(key, default_value: str = None) -> str:

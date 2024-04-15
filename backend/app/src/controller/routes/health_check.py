@@ -5,24 +5,21 @@ from flask_restx import Namespace, Resource, fields
 from src import AppContainer
 from src.controller.dto.health_check_response import HealthCheckResponse
 from src.service.health_check import HealthCheckService
-from src.utils.api_exceptions import ServerErrorException
 from src.utils.json_response import respond_with_json
 
-namespace = Namespace(
-    name="health-check", description="Health check related operations"
-)
+api = Namespace(name="health-check", description="Health check related operations")
 
 
-health_check_response_fields = namespace.model(
+health_check_response_fields = api.model(
     "HealthCheckResponse", {"ok": fields.Boolean()}
 )
 
-health_check_error_response_fields = namespace.model(
+health_check_error_response_fields = api.model(
     "HealthCheckErrorResponse", {"message": fields.String(), "extra": fields.String()}
 )
 
 
-@namespace.route("")
+@api.route("")
 class HealthCheck(Resource):
     @inject
     def __init__(
@@ -37,23 +34,17 @@ class HealthCheck(Resource):
         super().__init__(api, *args, **kwargs)
         self.__service = service
 
-    @namespace.response(code=200, model=health_check_response_fields, description="OK")
-    @namespace.response(
-        code=500,
+    @api.doc("health_check")
+    @api.response(
+        code=HTTPStatus.OK.value, model=health_check_response_fields, description="OK"
+    )
+    @api.response(
+        code=HTTPStatus.INTERNAL_SERVER_ERROR.value,
         model=health_check_error_response_fields,
         description="Internal Server Error",
     )
     def get(self):
-        try:
-            is_healthy = self.__service.check_health()
-        except Exception as ex:
-            raise ServerErrorException(
-                extra="The application isn't ready to work as expected"
-            )
+        self.__service.check_health()
 
-        if is_healthy:
-            payload = HealthCheckResponse(ok=True)
-            return respond_with_json(payload=payload, status_code=HTTPStatus.OK)
-
-        payload = HealthCheckResponse(ok=False)
-        return respond_with_json(payload=payload, status_code=HTTPStatus.OK)
+        payload = HealthCheckResponse(ok=True)
+        return respond_with_json(payload=payload, code=HTTPStatus.OK.value)

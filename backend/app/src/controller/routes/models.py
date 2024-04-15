@@ -64,10 +64,10 @@ class SetModel(Resource):
             name = data.get("name")
             self.__service.set_model(name=name)
         except Exception as ex:
-            raise ServerErrorException(extra=f"{str(ex)}")
+            raise ServerErrorException(code=404, extra=f"{str(ex)}")
 
         return respond_with_json(
-            payload=SetModelResponse(ok=True), status_code=HTTPStatus.OK
+            payload=SetModelResponse(ok=True), code=HTTPStatus.OK.value
         )
 
 
@@ -96,8 +96,9 @@ class GetModel(Resource):
         model = self.__service.get_model()
 
         if not model:
-            return make_response(HTTPStatus.NO_CONTENT)
+            return make_response("", HTTPStatus.NO_CONTENT.value)
 
         return respond_with_json(
-            payload=GetModelResponse(name=model.model_name), status_code=HTTPStatus.OK
+            payload=GetModelResponse(name=model.model_name),
+            code=HTTPStatus.OK.value,
         )

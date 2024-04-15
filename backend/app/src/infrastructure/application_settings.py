@@ -33,6 +33,14 @@ class ApplicationSettings:
             default_value="postgresql://root:root@localhost:5432/db",
         )
 
+    @property
+    def upload_folder(self) -> str:
+        return self.get(key="UPLOAD_FOLDER", default_value="/uploads")
+
+    @property
+    def allowed_extensions(self) -> str:
+        return self.get(key="ALLOWED_EXTENSIONS", default_value="jpg")
+
     @staticmethod
     def get(key, default_value: str = None) -> str:
         return os.getenv(key, default_value)

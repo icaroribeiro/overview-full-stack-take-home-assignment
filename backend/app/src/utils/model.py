@@ -14,7 +14,7 @@ class Model:
         providers = ort.get_available_providers()
         print(f"Available providers: {providers}")
         self.model = ort.InferenceSession(
-            f"models/{model_name}.onnx", providers=providers
+            f"config/models/{model_name}.onnx", providers=providers
         )
         self.input_name = self.model.get_inputs()[0].name
         self.output_name = self.model.get_outputs()[0].name

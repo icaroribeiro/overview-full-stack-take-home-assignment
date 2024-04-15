@@ -1,6 +1,5 @@
 from http import HTTPStatus
 
-from src.utils.json_response import respond_with_json
 from werkzeug.exceptions import HTTPException
 
 
@@ -10,8 +9,25 @@ class ApiException(HTTPException):
         rv = {"message": message}
         if extra:
             rv["extra"] = extra
-        self.__data = rv
-        self.__code = code
+        self.data = rv
+        self.code = code
+
+
+class NoContentException(ApiException):
+    def __init__(
+        self, message=None, extra=None, code: int = HTTPStatus.NO_CONTENT.value
+    ):
+        super().__init__(message=message, extra=extra, code=code)
+
+
+class BadRequestException(ApiException):
+    def __init__(
+        self,
+        message: str = "Oops! Bad request",
+        extra=None,
+        code: int = HTTPStatus.BAD_REQUEST.value,
+    ):
+        super().__init__(message=message, extra=extra, code=code)
 
 
 class ServerErrorException(ApiException):
@@ -19,6 +35,6 @@ class ServerErrorException(ApiException):
         self,
         message: str = "Oops! Something went wrong",
         extra: str = None,
-        code: int = HTTPStatus.INTERNAL_SERVER_ERROR,
+        code: int = HTTPStatus.INTERNAL_SERVER_ERROR.value,
     ):
         super().__init__(extra=extra, message=message, code=code)

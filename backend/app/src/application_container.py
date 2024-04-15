@@ -1,5 +1,6 @@
 from dependency_injector import containers, providers
 from src.infrastructure.database.database_session_manager import DatabaseSessionManager
+from src.service.detection import DetectionService
 from src.service.file import FileService
 from src.service.health_check import HealthCheckService
 from src.service.model import ModelService
@@ -35,6 +36,8 @@ class ServiceContainer(containers.DeclarativeContainer):
     model_service = providers.Factory(ModelService)
 
     file_service = providers.Factory(FileService)
+
+    detection_service = providers.Factory(DetectionService)
 
 
 class AppContainer(containers.DeclarativeContainer):

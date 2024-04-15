@@ -19,6 +19,9 @@ RUN pip install --upgrade pip && \
 # Copy the rest of the application code to the working directory
 COPY . .
 
+# Configure PYTHONPATH
+ENV PYTHONPATH="$PYTHONPATH:/app"
+
 # Expose the port on which the app will run
 EXPOSE 5000
 

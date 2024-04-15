@@ -1,5 +1,6 @@
 from flask import Blueprint
 from flask_restx import Api
+from src.controller.routes.detections import api as detections_namespace
 from src.controller.routes.health_check import api as health_check_namespace
 from src.controller.routes.images import api as images_namespace
 from src.controller.routes.models import api as models_namespace
@@ -22,3 +23,4 @@ api = Api(
 api.add_namespace(health_check_namespace)
 api.add_namespace(models_namespace)
 api.add_namespace(images_namespace)
+api.add_namespace(detections_namespace)

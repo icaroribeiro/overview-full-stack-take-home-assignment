@@ -1,3 +1,5 @@
+import os
+
 from src.infrastructure import application_settings
 from src.utils.api_exceptions import BadRequestException, ServerErrorException
 from src.utils.file_extension import is_allowed_file
@@ -5,19 +7,21 @@ from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 
 
-class ImageService:
-    def save_image(self, file: FileStorage) -> str:
+class FileService:
+    def save_file(self, file: FileStorage, allowed_extensions: list[str]) -> str:
         if file.filename == "":
             raise BadRequestException(extra="No selected file")
 
-        if not is_allowed_file(filename=file.filename):
+        if not is_allowed_file(
+            filename=file.filename, allowed_extensions=allowed_extensions
+        ):
             raise BadRequestException(
-                extra=f"File extension of file={file.filename} not allowed"
+                extra=f"File extension of file={file.filename} is not allowed"
             )
 
         filename = secure_filename(file.filename)
 
-        path = self.__create_path(filename=filename)
+        path = os.path.join(application_settings.upload_folder, filename)
 
         try:
             file.save(path)
@@ -25,7 +29,3 @@ class ImageService:
             raise ServerErrorException(extra=f"File={filename} not saved")
 
         return path
-
-    @staticmethod
-    def __create_path(filename: str) -> str:
-        return "".join(["/", "app", application_settings.upload_folder, "/", filename])

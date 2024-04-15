@@ -1,5 +1,6 @@
 from sqlalchemy import text
 from sqlalchemy.orm import Session
+from src.utils.api_exceptions import ServerErrorException
 
 
 class HealthCheckService:
@@ -10,5 +11,8 @@ class HealthCheckService:
         try:
             self.__session.execute(statement=text("""SELECT 1"""))
         except Exception as ex:
-            return False
+            raise ServerErrorException(
+                extra="The application isn't ready to work as expected"
+            )
+
         return True

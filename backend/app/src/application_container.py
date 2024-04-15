@@ -1,6 +1,7 @@
 from dependency_injector import containers, providers
 from src.infrastructure.database.database_session_manager import DatabaseSessionManager
 from src.service.health_check import HealthCheckService
+from src.service.image import ImageService
 from src.service.model import ModelService
 
 
@@ -32,6 +33,8 @@ class ServiceContainer(containers.DeclarativeContainer):
     )
 
     model_service = providers.Factory(ModelService)
+
+    image_service = providers.Factory(ImageService)
 
 
 class AppContainer(containers.DeclarativeContainer):

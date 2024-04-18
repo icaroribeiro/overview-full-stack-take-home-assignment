@@ -5,14 +5,14 @@ from src.utils.api_exceptions import ServerErrorException
 
 class HealthCheckService:
     def __init__(self, session: Session):
-        self.__session = session
+        self.session = session
 
     def check_health(self) -> bool:
         try:
-            self.__session.execute(statement=text("""SELECT 1"""))
+            self.session.execute(statement=text("""SELECT 1"""))
         except Exception as ex:
             raise ServerErrorException(
-                extra="The application isn't ready to work as expected"
+                extra=f"The application isn't ready to work as expected: {str(ex)}"
             )
 
         return True

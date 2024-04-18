@@ -1,22 +1,16 @@
-from dataclasses import dataclass
+from sqlalchemy import ARRAY, Column, Float, String
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy_serializer import SerializerMixin
+from src.domain.model import Default
+from src.infrastructure.database import Base
 
-from src.domain.model.box import BBOX
 
+class Prediction(Default, Base, SerializerMixin):
+    __tablename__ = "prediction"
 
-@dataclass
-class Prediction:
-    class_name: int
-    confidence: float
-    box: BBOX
-
-    def to_dict(self):
-        return {
-            "class_name": str(self.class_name),
-            "confidence": float(self.confidence),
-            "box": {
-                "left": int(self.box.left),
-                "top": int(self.box.top),
-                "width": int(self.box.width),
-                "height": int(self.box.height),
-            },
-        }
+    video_id = Column("video_id", UUID(as_uuid=True), unique=True, nullable=False)
+    image_path = Column("image_path", String, nullable=False)
+    model_name = Column("model_name", String, nullable=False)
+    confidence = Column("confidence", Float, nullable=False)
+    iou = Column("iou", Float, nullable=False)
+    detection_list = Column("detection_list", ARRAY(String), nullable=False)

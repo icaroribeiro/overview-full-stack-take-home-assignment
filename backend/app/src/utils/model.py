@@ -4,8 +4,8 @@ import cv2
 import numpy as np
 import onnxruntime as ort
 from PIL import Image
-from src.domain.model.box import BBOX
-from src.domain.model.prediction import Prediction
+from src.utils.box import BBOX
+from src.utils.prediction import Prediction
 
 
 class Model:

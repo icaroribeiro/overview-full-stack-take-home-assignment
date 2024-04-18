@@ -2,3 +2,4 @@
 backend/__pycache__/
 backend/*.py[cod]
 backend/*$py.class
+frontend/app/node_modules

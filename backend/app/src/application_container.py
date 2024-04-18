@@ -1,8 +1,10 @@
 from dependency_injector import containers, providers
 from src.infrastructure.database.database_session_manager import DatabaseSessionManager
+from src.infrastructure.repository.prediction import PredictionRepository
 from src.infrastructure.repository.video import VideoRepository
 from src.service.file import FileService
 from src.service.health_check import HealthCheckService
+from src.service.prediction import PredictionService
 from src.service.video import VideoService
 
 
@@ -29,6 +31,10 @@ class RepositoryContainer(containers.DeclarativeContainer):
         VideoRepository, session=infrastructure.session
     )
 
+    prediction_repository = providers.Factory(
+        PredictionRepository, session=infrastructure.session
+    )
+
 
 class ServiceContainer(containers.DeclarativeContainer):
     infrastructure = providers.DependenciesContainer()
@@ -44,6 +50,11 @@ class ServiceContainer(containers.DeclarativeContainer):
     video_service = providers.Factory(
         VideoService,
         video_repository=repository.video_repository,
+    )
+
+    prediction_service = providers.Factory(
+        PredictionService,
+        prediction_repository=repository.prediction_repository,
     )
 
 

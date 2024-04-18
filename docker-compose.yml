@@ -14,6 +14,15 @@ services:
     depends_on:
       - db
 
+  frontend-app:
+    container_name: frontend-app-container
+    build:
+      context: ./frontend/app
+      dockerfile: Dockerfile.multi-stage
+    restart: on-failure
+    ports:
+      - "3000:80"
+
   db:
     container_name: db-container
     build:

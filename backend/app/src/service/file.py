@@ -8,7 +8,8 @@ from werkzeug.utils import secure_filename
 
 
 class FileService:
-    def save_file(self, file: FileStorage, allowed_extensions: list[str]) -> str:
+    @staticmethod
+    def save_file(file: FileStorage, allowed_extensions: list[str]) -> str:
         if file.filename == "":
             raise BadRequestException(extra="No selected file")
 
@@ -26,6 +27,8 @@ class FileService:
         try:
             file.save(path)
         except Exception as ex:
-            raise ServerErrorException(extra=f"File={filename} not saved")
+            raise ServerErrorException(
+                extra=f"Failed to save file={filename}: {str(ex)}"
+            )
 
         return path

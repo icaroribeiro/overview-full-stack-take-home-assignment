@@ -1,6 +1,7 @@
 import logging
 
 from flask import Flask
+from flask_cors import CORS
 from src.application_container import AppContainer, Core
 from src.controller import blueprint as endpoints
 from src.controller.routes import health_check as health_check_module
@@ -20,6 +21,7 @@ def create_app() -> Flask:
     container.wire(modules=[predictions_module])
 
     app = Flask(__name__)
+    CORS(app)
     app.logger.setLevel(logging.INFO)
     app.config["RESTX_MASK_SWAGGER"] = False
     app.config["ERROR_INCLUDE_MESSAGE"] = False

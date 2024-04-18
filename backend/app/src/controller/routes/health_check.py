@@ -1,6 +1,7 @@
 from http import HTTPStatus
 
 from dependency_injector.wiring import Provide, inject
+from flask import Response, jsonify, make_response
 from flask_restx import Namespace, Resource, fields
 from src import AppContainer
 from src.controller.dto.health_check_response import HealthCheckResponse
@@ -46,5 +47,6 @@ class HealthCheck(Resource):
     def get(self):
         self.__service.check_health()
 
-        payload = HealthCheckResponse(ok=True)
-        return respond_with_json(payload=payload, code=HTTPStatus.OK.value)
+        return respond_with_json(
+            payload=HealthCheckResponse(ok=True).json(), code=HTTPStatus.OK.value
+        )

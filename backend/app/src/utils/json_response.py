@@ -1,8 +1,9 @@
-import json
+from typing import Any
 
 from flask import Response, make_response
-from pydantic import BaseModel
 
 
-def respond_with_json(payload: BaseModel, code: int) -> Response:
-    return make_response(json.loads(payload.model_dump_json()), code)
+def respond_with_json(payload: Any, code: int) -> Response:
+    headers = dict()
+    headers["Content-Type"] = "application/json"
+    return make_response(payload, code, headers)

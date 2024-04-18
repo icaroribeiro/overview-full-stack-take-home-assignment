@@ -9,6 +9,9 @@ startup-apps:
 startup-backend-app:
 	docker-compose up --build -d backend-app
 
+startup-frontend-app:
+	docker-compose up --build -d frontend-app
+
 startup-db:
 	docker-compose up --build -d db
 
@@ -19,6 +22,9 @@ shutdown-apps:
 
 shutdown-backend-app:
 	docker-compose down -v --rmi local backend-app
+
+shutdown-frontend-app:
+	docker-compose down -v --rmi local frontend-app
 
 shutdown-db:
 	docker-compose down -v --rmi local db

@@ -1,0 +1,298 @@
+{
+	"info": {
+		"_postman_id": "e39f186b-6ed7-401b-bb14-38ca1b5ea587",
+		"name": "overview-full-stack-take-home-assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "HealthCheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/health-check",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"health-check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateVideo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"video-11\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/videos",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"videos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetVideoByName",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/videos?name=video-10",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"videos"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "video-10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UploadImageFromVideo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/D:/Python/workspace/src/github.com/icaroribeiro/take-home-assignments/overview/overview-full-stack-take-home-assignment/backend/app/test/bus.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/videos/18e2cdf0-a59f-4056-8ee8-e02a7290a722/upload-image",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"videos",
+						"18e2cdf0-a59f-4056-8ee8-e02a7290a722",
+						"upload-image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoadModelForPrediction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"yolov8n\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/predictions/load-model",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"predictions",
+						"load-model"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLoadedModelForPrediction",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/predictions/get-loaded-model",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"predictions",
+						"get-loaded-model"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreatePrediction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"video_id\": \"18e2cdf0-a59f-4056-8ee8-e02a7290a722\",\r\n    \"image_path\": \"/app/uploads/bus.jpg\",\r\n    \"confidence\": 0.7,\r\n    \"iou\": 0.5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/predictions",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"predictions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPredictionsByVideoID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/predictions?video_id=18e2cdf0-a59f-4056-8ee8-e02a7290a722",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"predictions"
+					],
+					"query": [
+						{
+							"key": "video_id",
+							"value": "18e2cdf0-a59f-4056-8ee8-e02a7290a722"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPredictionsByVideoIDAndSortTypeAndLimit",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/predictions?video_id=18e2cdf0-a59f-4056-8ee8-e02a7290a722&sort_type=desc&limit=10",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"predictions"
+					],
+					"query": [
+						{
+							"key": "video_id",
+							"value": "18e2cdf0-a59f-4056-8ee8-e02a7290a722"
+						},
+						{
+							"key": "sort_type",
+							"value": "desc"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

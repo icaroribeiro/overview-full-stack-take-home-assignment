@@ -1,9 +1,9 @@
 from dependency_injector import containers, providers
 from src.infrastructure.database.database_session_manager import DatabaseSessionManager
-from src.service.detection import DetectionService
+from src.infrastructure.repository.video import VideoRepository
 from src.service.file import FileService
 from src.service.health_check import HealthCheckService
-from src.service.model import ModelService
+from src.service.video import VideoService
 
 
 def session_factory(conn_string: str):
@@ -25,19 +25,26 @@ class InfrastructureContainer(containers.DeclarativeContainer):
 class RepositoryContainer(containers.DeclarativeContainer):
     infrastructure = providers.DependenciesContainer()
 
+    video_repository = providers.Factory(
+        VideoRepository, session=infrastructure.session
+    )
+
 
 class ServiceContainer(containers.DeclarativeContainer):
     infrastructure = providers.DependenciesContainer()
+
+    repository = providers.DependenciesContainer()
 
     health_check_service = providers.Factory(
         HealthCheckService, session=infrastructure.session
     )
 
-    model_service = providers.Factory(ModelService)
-
     file_service = providers.Factory(FileService)
 
-    detection_service = providers.Factory(DetectionService)
+    video_service = providers.Factory(
+        VideoService,
+        video_repository=repository.video_repository,
+    )
 
 
 class AppContainer(containers.DeclarativeContainer):
@@ -45,4 +52,8 @@ class AppContainer(containers.DeclarativeContainer):
 
     infrastructure = providers.Container(InfrastructureContainer, config=config)
 
-    service = providers.Container(ServiceContainer, infrastructure=infrastructure)
+    repository = providers.Container(RepositoryContainer, infrastructure=infrastructure)
+
+    service = providers.Container(
+        ServiceContainer, infrastructure=infrastructure, repository=repository
+    )

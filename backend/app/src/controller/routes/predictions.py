@@ -187,7 +187,7 @@ class GetLoadedModel(Resource):
         super().__init__(api, *args, **kwargs)
         self.prediction_service = prediction_service
 
-    @api.doc("get_model")
+    @api.doc("get_loaded_model")
     @api.response(
         code=HTTPStatus.OK.value,
         model=get_loaded_model_response_fields,

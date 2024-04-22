@@ -11,7 +11,7 @@ api_description = "A REST API developed using Python, Flask, Postgres and Docker
 
 api = Api(
     blueprint,
-    title="Overview Take Home Assignment",
+    title="Ícaro Ribeiro's Overview Take-Home Assignment",
     version="1.0",
     description=api_description,
     contact_url="https://www.linkedin.com/in/icaroribeiro",

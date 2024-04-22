@@ -54,7 +54,7 @@ function PrintPredictionRecords() {
       <Form.Group>
         <br></br>
         <Form.Label>
-          <b>Get The Lastest 10 Video Prediction Records</b>
+          <b>Get The 10 Most Recent Video Prediction Records</b>
         </Form.Label>
         <br></br>
         <Button variant="primary" disabled={isRunning} onClick={handleClick}>

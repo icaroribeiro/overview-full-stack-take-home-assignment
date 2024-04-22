@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import Optional
 
 from pydantic import BaseModel
 from src.domain.model.video import Video
@@ -24,14 +23,6 @@ class VideoResponse(BaseModel):
             image_path_list=image_path_list,
             created_at=video.created_at,
         )
-
-
-class CreateVideoResponse(VideoResponse):
-    pass
-
-
-class GetVideoResponse(VideoResponse):
-    pass
 
 
 class UploadImageResponse(BaseModel):

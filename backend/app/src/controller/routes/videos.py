@@ -4,11 +4,7 @@ from http import HTTPStatus
 from dependency_injector.wiring import Provide, inject
 from flask_restx import Namespace, Resource, fields, reqparse
 from src import AppContainer
-from src.controller.dto.videos import (
-    CreateVideoResponse,
-    GetVideoResponse,
-    UploadImageResponse,
-)
+from src.controller.dto.videos import UploadImageResponse, VideoResponse
 from src.infrastructure import application_settings
 from src.service.file import FileService
 from src.service.video import VideoService
@@ -34,8 +30,8 @@ upload_image_parser.add_argument(
     "file", location="files", type=FileStorage, required=True
 )
 
-create_video_response_fields = api.model(
-    name="CreateVideoResponse",
+video_response_fields = api.model(
+    name="VideoResponse",
     model={
         "id": fields.String(),
         "name": fields.String(),
@@ -43,22 +39,12 @@ create_video_response_fields = api.model(
         "created_at": fields.Date(),
     },
 )
-create_video_error_response_fields = api.model(
-    "CreateVideoErrorResponse",
+video_error_response_fields = api.model(
+    "VideoErrorResponse",
     {"message": fields.String(), "extra": fields.String()},
 )
-
-get_video_response_fields = api.model(
-    name="GetVideoResponse",
-    model={
-        "id": fields.String(),
-        "name": fields.String(),
-        "image_path_list": fields.List(fields.String()),
-        "created_at": fields.Date(),
-    },
-)
-get_videos_response_fields = [get_video_response_fields]
-get_videos_error_response_fields = api.model(
+videos_response_fields = [video_response_fields]
+videos_error_response_fields = api.model(
     "GetVideosErrorResponse",
     {"message": fields.String(), "extra": fields.String()},
 )
@@ -128,12 +114,12 @@ class Videos(Resource):
     @api.expect(create_video_parser)
     @api.response(
         code=HTTPStatus.CREATED.value,
-        model=create_video_response_fields,
+        model=video_response_fields,
         description="Created",
     )
     @api.response(
         code=HTTPStatus.INTERNAL_SERVER_ERROR.value,
-        model=create_video_error_response_fields,
+        model=video_error_response_fields,
         description="Internal Server Error",
     )
     def post(self):
@@ -143,7 +129,7 @@ class Videos(Resource):
         video = self.video_service.save_video(name)
 
         return respond_with_json(
-            payload=CreateVideoResponse.from_domain(video=video).json(),
+            payload=VideoResponse.from_domain(video=video).json(),
             code=HTTPStatus.CREATED.value,
         )
 
@@ -151,12 +137,12 @@ class Videos(Resource):
     @api.expect(get_videos_parser)
     @api.response(
         code=HTTPStatus.OK.value,
-        model=get_videos_response_fields,
+        model=videos_response_fields,
         description="OK",
     )
     @api.response(
         code=HTTPStatus.INTERNAL_SERVER_ERROR.value,
-        model=get_videos_error_response_fields,
+        model=videos_error_response_fields,
         description="Internal Server Error",
     )
     def get(self):
@@ -166,7 +152,7 @@ class Videos(Resource):
         video_list = self.video_service.retrieve_videos(name=name)
 
         list_videos_response = [
-            json.loads(GetVideoResponse.from_domain(video=video).json())
+            json.loads(VideoResponse.from_domain(video=video).json())
             for video in video_list
         ]
 

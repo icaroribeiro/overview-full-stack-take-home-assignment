@@ -79,15 +79,33 @@ This page contains the mechanism for making a prediction.
 
 It is possible to make a prediction using an image using prediction settings (model, confidence and iou).
 
-First, enter the name of the video to be recorded from which an image would be extracted for prediction. As previously stated, a way to play a video and extract an image has not been implemented. So, I decided to create another way to do this. After that, click on the button below.
+To do it, perform the following steps:
 
-Then, upload an image and see that it will appear below. For example, the test image sent in the challenge: `bus.png`. After that, click on the button below. (In this step the image will be sent to the backend application and the related video table record will be updated indicating that this image is associated with the previously registered video. In this case, the `image_path_list` field will contain the path of the image that was sent to the backend application.)
+**Step 1**
+
+First, enter the name of the video to be recorded from which an image would be extracted for prediction.
+
+As previously stated, a way to play a video and extract an image has not been implemented. So, I decided to create another way to do this. After that, click on the button below.
+
+**Step 2**
+
+Then, upload an image and see that it will appear below. For example, the test image sent in the challenge: `bus.png`. After that, click on the button below.
+
+In this step the image will be sent to the backend application and the related video table record will be updated indicating that this image is associated with the previously registered video. In this case, the `image_path_list` field will contain the path of the image that was sent to the backend application.
+
+**Step 3**
 
 After that, select the model that will be used in the forecast and click on the button below to load it.
 
+**Step 4**
+
 Then, configure the additional Confidence and Iou parameter values to make the prediction.
 
+**Step 5**
+
 Then click on the button below to predict the image that was sent and then the table will be filled with the prediction data.
+
+**Step 6**
 
 Finally, to generate the related predicted image, click on the button below.
 
@@ -101,7 +119,13 @@ This page contains the mechanism for searching predictions.
 
 It is possible to fetch the 10 most recent predictions related to a video.
 
+To do it, perform the following steps:
+
+**Step 1**
+
 First, type the name of the video to be consulted to search for related predictions. After that, click on the button below.
+
+**Step 2**
 
 To get predictions related to the video, click on the button below.
 

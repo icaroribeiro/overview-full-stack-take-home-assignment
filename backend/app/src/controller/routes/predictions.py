@@ -5,10 +5,9 @@ from dependency_injector.wiring import Provide, inject
 from flask_restx import Namespace, Resource, fields, reqparse
 from src import AppContainer
 from src.controller.dto.predictions import (
-    CreatePredictionResponse,
-    GetLoadedModelResponse,
-    GetPredictionResponse,
+    LoadedModelResponse,
     LoadModelResponse,
+    PredictionResponse,
 )
 from src.service.prediction import PredictionService
 from src.utils.json_response import respond_with_json
@@ -67,14 +66,14 @@ load_model_error_response_fields = api.model(
     {"message": fields.String(), "extra": fields.String()},
 )
 
-get_loaded_model_response_fields = api.model(
-    "GetLoadedModelResponse",
+loaded_model_response_fields = api.model(
+    "LoadedModelResponse",
     {
         "name": fields.String(),
     },
 )
-get_loaded_model_error_response_fields = api.model(
-    "GetLoadedModelErrorResponse",
+loaded_model_error_response_fields = api.model(
+    "LoadedModelErrorResponse",
     {"message": fields.String(), "extra": fields.String()},
 )
 
@@ -97,8 +96,8 @@ detection_response_fields = api.model(
     },
 )
 
-create_prediction_response_fields = api.model(
-    name="CreatePredictionResponse",
+prediction_response_fields = api.model(
+    name="PredictionResponse",
     model={
         "id": fields.String(),
         "video_id": fields.String(),
@@ -110,27 +109,13 @@ create_prediction_response_fields = api.model(
         "created_at": fields.Date(),
     },
 )
-create_prediction_error_response_fields = api.model(
-    name="CreatePredictionErrorResponse",
+prediction_error_response_fields = api.model(
+    name="PredictionErrorResponse",
     model={"message": fields.String(), "extra": fields.String()},
 )
-
-get_prediction_response_fields = api.model(
-    name="GetPredictionResponse",
-    model={
-        "id": fields.String(),
-        "video_id": fields.String(),
-        "image_path": fields.String(),
-        "model_name": fields.String(),
-        "confidence": fields.Float(),
-        "iou": fields.Float(),
-        "detection_list": fields.List(fields.Nested(detection_response_fields)),
-        "created_at": fields.Date(),
-    },
-)
-get_predictions_response_fields = [get_prediction_response_fields]
-get_predictions_error_response_fields = api.model(
-    name="GetPredictionsErrorResponse",
+predictions_response_fields = [prediction_response_fields]
+predictions_error_response_fields = api.model(
+    name="PredictionsErrorResponse",
     model={"message": fields.String(), "extra": fields.String()},
 )
 
@@ -190,19 +175,19 @@ class GetLoadedModel(Resource):
     @api.doc("get_loaded_model")
     @api.response(
         code=HTTPStatus.OK.value,
-        model=get_loaded_model_response_fields,
+        model=loaded_model_response_fields,
         description="OK",
     )
     @api.response(
         code=HTTPStatus.NO_CONTENT.value,
-        model=get_loaded_model_error_response_fields,
+        model=loaded_model_error_response_fields,
         description="No Content",
     )
     def get(self):
         model = self.prediction_service.get_loaded_model()
 
         return respond_with_json(
-            payload=GetLoadedModelResponse(name=model.model_name).json(),
+            payload=LoadedModelResponse(name=model.model_name).json(),
             code=HTTPStatus.OK.value,
         )
 
@@ -226,12 +211,12 @@ class Predictions(Resource):
     @api.expect(create_prediction_parser)
     @api.response(
         code=HTTPStatus.CREATED.value,
-        model=create_prediction_response_fields,
+        model=prediction_response_fields,
         description="Created",
     )
     @api.response(
         code=HTTPStatus.INTERNAL_SERVER_ERROR.value,
-        model=create_prediction_error_response_fields,
+        model=prediction_error_response_fields,
         description="Internal Server Error",
     )
     def post(self):
@@ -246,7 +231,7 @@ class Predictions(Resource):
         )
 
         return respond_with_json(
-            payload=CreatePredictionResponse.from_domain(prediction=prediction).json(),
+            payload=PredictionResponse.from_domain(prediction=prediction).json(),
             code=HTTPStatus.CREATED.value,
         )
 
@@ -254,12 +239,12 @@ class Predictions(Resource):
     @api.expect(get_predictions_parser)
     @api.response(
         code=HTTPStatus.OK.value,
-        model=get_predictions_response_fields,
+        model=predictions_response_fields,
         description="OK",
     )
     @api.response(
         code=HTTPStatus.INTERNAL_SERVER_ERROR.value,
-        model=get_predictions_error_response_fields,
+        model=predictions_error_response_fields,
         description="Internal Server Error",
     )
     def get(self):
@@ -276,9 +261,7 @@ class Predictions(Resource):
 
         return respond_with_json(
             payload=[
-                json.loads(
-                    GetPredictionResponse.from_domain(prediction=prediction).json()
-                )
+                json.loads(PredictionResponse.from_domain(prediction=prediction).json())
                 for prediction in prediction_list
             ],
             code=HTTPStatus.OK.value,

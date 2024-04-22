@@ -1,6 +1,6 @@
 import NavigationBar from "./components/NavigationBar";
-import About from "./components/About";
-import Home from "./components/Home";
+import About from "./pages/About";
+import Home from "./pages/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ShowPredictions from "./pages/ShowPredictions";

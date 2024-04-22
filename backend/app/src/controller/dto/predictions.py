@@ -9,7 +9,7 @@ class LoadModelResponse(BaseModel):
     ok: bool
 
 
-class GetLoadedModelResponse(BaseModel):
+class LoadedModelResponse(BaseModel):
     name: str
 
 
@@ -52,11 +52,3 @@ class PredictionResponse(BaseModel):
             detection_list=detection_list,
             created_at=prediction.created_at,
         )
-
-
-class CreatePredictionResponse(PredictionResponse):
-    pass
-
-
-class GetPredictionResponse(PredictionResponse):
-    pass

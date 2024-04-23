@@ -55,7 +55,6 @@ function RegisterVideo() {
           <Form.Control
             type="text"
             placeholder="Enter the Video Name"
-            value={videoName}
             onChange={handleVideoNameChange}
           />
           <Button variant="primary" disabled={isRunning} onClick={handleClick}>

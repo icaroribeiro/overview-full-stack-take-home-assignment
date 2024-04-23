@@ -111,7 +111,7 @@ Finally, to generate the related predicted image, click on the button below.
 
 Example:
 
-![MakePredictionExample](backend/app/docs/MakePredictionExample.pdf)
+![MakePredictionExample](backend/app/docs/Profile.pdf)
 
 #### Show Predictions
 
@@ -135,7 +135,7 @@ Example:
 
 ### About
 
-This page contains my contact's info.
+This page contains my contact info.
 
 ## How to run the project?
 

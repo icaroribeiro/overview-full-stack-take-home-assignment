@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS "prediction";
-
 CREATE TABLE IF NOT EXISTS prediction (
     id uuid NOT NULL,
     video_id uuid NOT NULL,

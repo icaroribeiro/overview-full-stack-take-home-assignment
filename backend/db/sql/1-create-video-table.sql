@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS "video";
-
 CREATE TABLE IF NOT EXISTS video (
     id uuid NOT NULL,
     name text NOT NULL,

@@ -111,6 +111,10 @@ Example:
 
 [MakePredictionExample](docs/MakePredictionExample.pdf)
 
+Note:
+
+If you want to create another predicted image using the same image uploaded previously, you can do so by following the same procedure from Step 3 onwards.
+
 ### Show Predictions Page
 
 This page contains the mechanism for searching predictions.

@@ -67,13 +67,11 @@ To support the use of the API, it was created the file **backend/app/docs/overvi
 
 ## Frontend Application
 
-### Pages
-
-#### Home
+### Home Page
 
 This page contains the purpose of the application.
 
-#### Make Prediction
+### Make Prediction Page
 
 This page contains the mechanism for making a prediction.
 
@@ -115,7 +113,7 @@ Examples:
 
 [MakePredictionExample2](backend/app/docs/MakePredictionExample2.pdf)
 
-#### Show Predictions
+### Show Predictions Page
 
 This page contains the mechanism for searching predictions.
 
@@ -137,7 +135,7 @@ Examples:
 
 - [ShowPredictionsExample2](backend/app/docs/ShowPredictionsExample2.pdf)
 
-### About
+## About Page
 
 This page contains my contact info.
 

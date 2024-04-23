@@ -1,4 +1,4 @@
-export const setVideoDataAction = (id) => {
+export const setVideoDataAction = (id: string) => {
   return {
     type: "setVideoDataAction",
     payload: {

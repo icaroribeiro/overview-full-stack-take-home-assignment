@@ -1,4 +1,4 @@
 import { createContext } from "react";
 
-export const MakePredictionContext = createContext(null);
-export const MakePredictionDispatchContext = createContext(null);
+export const MakePredictionContext = createContext<any>(null);
+export const MakePredictionDispatchContext = createContext<any>(null);

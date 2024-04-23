@@ -4,7 +4,7 @@ import { Button, Form } from "react-bootstrap";
 import { fabric } from "fabric";
 
 function DrawPredictedImage() {
-  const state = useContext(MakePredictionContext);
+  const state = useContext<any>(MakePredictionContext);
 
   const [isRunning, setRunning] = useState(false);
 
@@ -18,8 +18,8 @@ function DrawPredictedImage() {
         const canvas = new fabric.Canvas("canvas");
         const image = URL.createObjectURL(state.imageData.file);
         fabric.Image.fromURL(image, function (img) {
-          canvas.setHeight(img.height);
-          canvas.setWidth(img.width);
+          canvas.setHeight(img.height!);
+          canvas.setWidth(img.width!);
           canvas.add(img);
 
           const detection_list = state.prediction.detection_list;

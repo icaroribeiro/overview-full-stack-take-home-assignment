@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { ShowPredictionsDispatchContext } from "../contexts/ShowPredictionsContext";
@@ -6,13 +6,16 @@ import VideoService from "../services/VideoService";
 import { setVideoDataAction } from "../states/actions/setVideoDataAction";
 
 function SearchVideo() {
-  const dispatch = useContext(ShowPredictionsDispatchContext);
+  const dispatch = useContext<any>(ShowPredictionsDispatchContext);
 
   const [isRunning, setRunning] = useState(false);
   const [videoName, setVideoName] = useState("");
 
-  const handleVideoNameChange = (event) => {
-    setVideoName(event.target.value);
+  const handleVideoNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+    if (value) {
+      setVideoName(value)
+    }
   };
 
   useEffect(() => {
@@ -28,7 +31,6 @@ function SearchVideo() {
       } catch (error) {
         console.error(`Failed to search video with name=${videoName}:`, error);
       } finally {
-        console.warn("Api call done!");
         setRunning(false);
       }
     }

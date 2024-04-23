@@ -1,18 +1,24 @@
-import { useContext } from "react";
+import { ChangeEvent, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import { MakePredictionDispatchContext } from "../contexts/MakePredictionContext";
 import { setConfidenceAction } from "../states/actions/setConfidenceAction";
 import { setIouAction } from "../states/actions/setIouAction";
 
 function AdditionalParameters() {
-  const dispatch = useContext(MakePredictionDispatchContext);
+  const dispatch = useContext<any>(MakePredictionDispatchContext);
 
-  const handleConfidenceChange = (event) => {
-    dispatch(setConfidenceAction(parseFloat(event.target.value)));
+  const handleConfidenceChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+    if (value) {
+      dispatch(setConfidenceAction(parseFloat(event.target.value)));
+    }
   };
 
-  const handleIouChange = (event) => {
-    dispatch(setIouAction(parseFloat(event.target.value)));
+  const handleIouChange = (event: ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value
+      if (value) {
+        dispatch(setIouAction(parseFloat(event.target.value)));
+      }
   };
 
   return (

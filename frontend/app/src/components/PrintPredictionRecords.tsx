@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 import PredictionService from "../services/PredictionService";
 
 function PrintPredictionRecords() {
-  const state = useContext(ShowPredictionsContext);
+  const state = useContext<any>(ShowPredictionsContext);
 
   const [isRunning, setRunning] = useState(false);
   const [predictions, setPredictions] = useState<PredictionResponse[]>([]);
@@ -28,7 +28,6 @@ function PrintPredictionRecords() {
           sortType,
           limit,
         );
-        console.log(response);
         setPredictions(response);
       } catch (error) {
         console.error(
@@ -36,7 +35,6 @@ function PrintPredictionRecords() {
           error,
         );
       } finally {
-        console.warn("Api call done!");
         setRunning(false);
       }
     }

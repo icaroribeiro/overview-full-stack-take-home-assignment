@@ -11,8 +11,8 @@ import {
 import { setPredictionAction } from "../states/actions/setPredictionAction";
 
 function PrintPredictionRecord() {
-  const state = useContext(MakePredictionContext);
-  const dispatch = useContext(MakePredictionDispatchContext);
+  const state = useContext<any>(MakePredictionContext);
+  const dispatch = useContext<any>(MakePredictionDispatchContext);
 
   const [isRunning, setRunning] = useState(false);
   const [prediction, setPrediction] = useState<PredictionResponse>();
@@ -35,7 +35,6 @@ function PrintPredictionRecord() {
           confidence,
           iou,
         );
-        console.log(response);
         setPrediction(response);
         dispatch(setPredictionAction(response));
       } catch (error) {
@@ -44,7 +43,6 @@ function PrintPredictionRecord() {
           error,
         );
       } finally {
-        console.warn("Api call done!");
         setRunning(false);
       }
     }

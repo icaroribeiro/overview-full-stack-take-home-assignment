@@ -1,4 +1,4 @@
-export default function (state, action) {
+export default function (state: any, action: any) {
   switch (action.type) {
     case "setVideoDataAction":
       return { ...state, videoData: { id: action.payload.id } };

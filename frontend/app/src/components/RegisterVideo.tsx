@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { MakePredictionDispatchContext } from "../contexts/MakePredictionContext";
@@ -6,13 +6,16 @@ import VideoService from "../services/VideoService";
 import { setVideoDataAction } from "../states/actions/setVideoDataAction";
 
 function RegisterVideo() {
-  const dispatch = useContext(MakePredictionDispatchContext);
+  const dispatch = useContext<any>(MakePredictionDispatchContext);
 
   const [isRunning, setRunning] = useState(false);
   const [videoName, setVideoName] = useState("");
 
-  const handleVideoNameChange = (event) => {
-    setVideoName(event.target.value);
+  const handleVideoNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+    if (value) {
+      setVideoName(value)
+    }
   };
 
   useEffect(() => {
@@ -23,7 +26,6 @@ function RegisterVideo() {
     if (isRunning) {
       try {
         const response = await VideoService.registerVideo(videoName);
-        console.log(response);
         dispatch(setVideoDataAction(response.id));
       } catch (error) {
         console.error(
@@ -31,7 +33,6 @@ function RegisterVideo() {
           error,
         );
       } finally {
-        console.warn("Api call done!");
         setRunning(false);
       }
     }

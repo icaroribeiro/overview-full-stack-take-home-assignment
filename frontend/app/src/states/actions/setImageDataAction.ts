@@ -1,4 +1,4 @@
-export const setImageDataAction = (file, path) => {
+export const setImageDataAction = (file: File, path: string) => {
   return {
     type: "setImageDataAction",
     payload: {

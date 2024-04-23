@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import PredictionService from "../services/PredictionService";
@@ -8,8 +8,11 @@ function LoadModel() {
   const [modelName, setModelName] = useState("yolov8n");
   const [isRunning, setRunning] = useState(false);
 
-  const handleModelNameChange = (event) => {
-    setModelName(event.target.value);
+  const handleModelNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+    if (value) {
+      setModelName(event.target.value);
+    }    
   };
 
   useEffect(() => {
@@ -19,12 +22,10 @@ function LoadModel() {
   const loadModel = async () => {
     if (isRunning) {
       try {
-        const response = await PredictionService.loadModel(modelName);
-        console.log(response);
+        await PredictionService.loadModel(modelName);
       } catch (error) {
         console.error(`Failed to load model with name=${modelName}:`, error);
       } finally {
-        console.warn("Api call done!");
         setRunning(false);
       }
     }

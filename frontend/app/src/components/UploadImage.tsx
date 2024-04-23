@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import {
   MakePredictionContext,
   MakePredictionDispatchContext,
@@ -9,14 +9,17 @@ import Image from "react-bootstrap/Image";
 import { setImageDataAction } from "../states/actions/setImageDataAction";
 
 function UploadImage() {
-  const state = useContext(MakePredictionContext);
-  const dispatch = useContext(MakePredictionDispatchContext);
+  const state = useContext<any>(MakePredictionContext);
+  const dispatch = useContext<any>(MakePredictionDispatchContext);
 
   const [isRunning, setRunning] = useState(false);
-  const [file, setFile] = useState(new Blob());
+  const [file, setFile] = useState(new File([""], "filename"));
 
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files
+    if (files) {
+      setFile(files[0]);
+    }
   };
 
   useEffect(() => {
@@ -29,7 +32,6 @@ function UploadImage() {
 
       try {
         const response = await VideoService.uploadImage(videoId, file);
-        console.log(response);
         dispatch(setImageDataAction(file, response.path));
       } catch (error) {
         console.error(
@@ -37,7 +39,6 @@ function UploadImage() {
           error,
         );
       } finally {
-        console.warn("Api call done!");
         setRunning(false);
       }
     }

@@ -107,7 +107,7 @@ Then click on the button below to predict the image that was sent and then the t
 
 Finally, to generate the related predicted image, click on the button below.
 
-Examples:
+Example:
 
 [MakePredictionExample](docs/MakePredictionExample.pdf)
 
@@ -127,7 +127,7 @@ First, type the name of the video to be consulted to search for related predicti
 
 To get predictions related to the video, click on the button below.
 
-Examples:
+Example:
 
 - [ShowPredictionsExample](docs/ShowPredictionsExample.pdf)
 

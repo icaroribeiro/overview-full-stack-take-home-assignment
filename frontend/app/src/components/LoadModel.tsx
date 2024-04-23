@@ -8,7 +8,7 @@ function LoadModel() {
   const [modelName, setModelName] = useState("yolov8n");
   const [isRunning, setRunning] = useState(false);
 
-  const handleModelNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleModelNameChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value
     if (value) {
       setModelName(event.target.value);

@@ -113,6 +113,8 @@ Examples:
 
 [MakePredictionExample](backend/app/docs/MakePredictionExample.pdf)
 
+[MakePredictionExample2](backend/app/docs/MakePredictionExample2.pdf)
+
 #### Show Predictions
 
 This page contains the mechanism for searching predictions.
@@ -131,7 +133,9 @@ To get predictions related to the video, click on the button below.
 
 Examples:
 
-[ShowPredictionsResult](backend/app/docs/ShowPredictionsExample.pdf)
+- [ShowPredictionsExample](backend/app/docs/ShowPredictionsExample.pdf)
+
+- [ShowPredictionsExample2](backend/app/docs/ShowPredictionsExample2.pdf)
 
 ### About
 

@@ -60,11 +60,11 @@ function PrintPredictionRecord() {
       <Form.Group>
         <br></br>
         <Form.Label>
-          <b>Create the Image Prediction Record</b>
+          <b>Create the Predicted Image</b>
         </Form.Label>
         <br></br>
         <Button variant="primary" disabled={isRunning} onClick={handleClick}>
-          {isRunning ? "Creating record…" : "Click here"}
+          {isRunning ? "Creating image..." : "Click here"}
         </Button>
         <br></br>
         <Table striped bordered hover>

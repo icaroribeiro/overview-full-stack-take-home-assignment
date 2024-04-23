@@ -57,15 +57,17 @@ After running the project, access the following URL through your web browser to 
 http://{host}:5000/apidoc
 ```
 
-**Note**:
-
-- During the development of the solution, the API documentation and API endpoint were tested by replacing the **{host}** previously informed by **127.0.0.1**
-
 #### Postman Collection
 
 To support the use of the API, it was created the file **backend/app/docs/overview-full-stack-take-home-assignment.postman_collection.json** which contains a group of requests that can be imported into the **Postman** tool (an API client used to facilitate the creation, sharing, testing and documentation of APIs by developers.).
 
 ## Frontend Application
+
+After running the project, access the following URL through your web browser to view an HTML page that illustrates the frontend application:
+
+```
+http://{host}:3000
+```
 
 ### Home Page
 
@@ -111,10 +113,6 @@ Example:
 
 [MakePredictionExample](docs/MakePredictionExample.pdf)
 
-Note:
-
-If you want to create another predicted image using the same image uploaded previously, you can do so by following the same procedure from Step 3 onwards.
-
 ### Show Predictions Page
 
 This page contains the mechanism for searching predictions.
@@ -138,6 +136,12 @@ Example:
 ## About Page
 
 This page contains my contact info.
+
+**Notes**:
+
+- During the development of the solution, the API documentation and API endpoint were tested by replacing the **{host}** previously informed by **127.0.0.1**
+
+- With regard to the creation of a predicted image, if you want to create more than one predicted image using the same image uploaded previously, you can do so by following the same procedure from Step 3 onwards informed in Make Prediction Page.
 
 ## How to run the project?
 

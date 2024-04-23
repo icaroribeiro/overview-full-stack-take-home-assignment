@@ -101,11 +101,11 @@ Then, configure the additional Confidence and Iou parameter values to make the p
 
 **Step 5**
 
-Then click on the button below to predict the image that was sent and then the table will be filled with the prediction data.
+Then click on the button below to created the predicted image that was sent and then the table will be filled with the prediction data.
 
 **Step 6**
 
-Finally, to generate the related predicted image, click on the button below.
+Finally, to draw the image with bouding boxes, click on the button below.
 
 Example:
 

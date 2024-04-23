@@ -109,9 +109,9 @@ Then click on the button below to predict the image that was sent and then the t
 
 Finally, to generate the related predicted image, click on the button below.
 
-Example:
+Examples:
 
-![MakePredictionExample](backend/app/docs/MakePredictionExample.pdf)
+[MakePredictionExample](backend/app/docs/MakePredictionExample.pdf)
 
 #### Show Predictions
 
@@ -129,9 +129,9 @@ First, type the name of the video to be consulted to search for related predicti
 
 To get predictions related to the video, click on the button below.
 
-Example:
+Examples:
 
-![ShowPredictionsResult](backend/app/docs/ShowPredictionsExample.pdf)
+[ShowPredictionsResult](backend/app/docs/ShowPredictionsExample.pdf)
 
 ### About
 

@@ -59,11 +59,11 @@ function DrawPredictedImage() {
       <Form>
         <Form.Group>
           <Form.Label>
-            <b>Create Predicted Image</b>
+            <b>Draw Image with Bounding Boxes</b>
           </Form.Label>
           <br></br>
           <Button variant="primary" disabled={isRunning} onClick={handleClick}>
-            {isRunning ? "Creating image…" : "Click here"}
+            {isRunning ? "Drawing image…" : "Click here"}
           </Button>
           <br></br>
           <canvas id="canvas" />

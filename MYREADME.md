@@ -109,9 +109,7 @@ Finally, to generate the related predicted image, click on the button below.
 
 Examples:
 
-[MakePredictionExample](backend/app/docs/MakePredictionExample.pdf)
-
-[MakePredictionExample2](backend/app/docs/MakePredictionExample2.pdf)
+[MakePredictionExample](docs/MakePredictionExample.pdf)
 
 ### Show Predictions Page
 
@@ -131,9 +129,7 @@ To get predictions related to the video, click on the button below.
 
 Examples:
 
-- [ShowPredictionsExample](backend/app/docs/ShowPredictionsExample.pdf)
-
-- [ShowPredictionsExample2](backend/app/docs/ShowPredictionsExample2.pdf)
+- [ShowPredictionsExample](docs/ShowPredictionsExample.pdf)
 
 ## About Page
 

@@ -111,7 +111,7 @@ Finally, to generate the related predicted image, click on the button below.
 
 Example:
 
-![MakePredictionExample](backend/app/docs/Profile.pdf)
+![MakePredictionExample](backend/app/docs/MakePredictionExample.pdf)
 
 #### Show Predictions
 
